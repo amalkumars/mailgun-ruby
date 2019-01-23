@@ -26,6 +26,14 @@ module Mailgun
       return res.to_h!
     end
 
+    def private_validate(address, mailbox_verification = false)
+      params = {:address => address}
+      params[:mailbox_verification] = true if mailbox_verification
+
+      res = @client.get "address/private/validate", params
+      return res.to_h!
+    end
+
     # Parses a delimiter separated list of email addresses into two lists:
     # parsed addresses and unparsable portions. The parsed addresses are a
     # list of addresses that are syntactically valid (and optionally have
